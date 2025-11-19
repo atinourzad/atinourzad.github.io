@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatemeh (Atena) Nourzad | PhD Candidate</title>
+    <meta name="description" content="Academic website of Fatemeh (Atena) Nourzad.">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* REFINED PALETTE - DARK PLUM & LILAC */
+            /* Sidebar: Darker, muted, almost black-purple */
+            --sidebar-bg: #1e1b29; 
+            
+            /* Sidebar Text: Soft white */
+            --sidebar-text: #f8fafc; 
+            
+            /* Primary Accent: Vibrant Lilac (for links/titles) */
+            --primary: #8b5cf6; 
+            
+            /* Secondary Accent: Soft Lavender (for borders/subtitles) */
+            --secondary: #ddd6fe; 
+            
+            /* Main Content Background */
+            --bg: #ffffff;
+            --text: #334155;
+            --gray: #64748b;
+            --light-gray: #f8fafc;
+            --card-border: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--bg);
+            display: flex;
+            flex-direction: row; /* Explicitly set row layout */
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 300px;
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            padding: 4rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid #2d2a3b;
+            text-align: left; 
+            z-index: 1000; /* Ensure it stays on top */
+        }
+
+        .profile-photo {
+            width: 120px; 
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            margin-bottom: 2rem;
+            background-color: var(--gray);
+        }
+
+        .sidebar h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 0.75rem;
+            color: #ffffff;
+        }
+
+        .sidebar .subtitle {
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-bottom: 3rem;
+            font-weight: 400;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin-bottom: auto; 
+            width: 100%;
+            padding: 0;
+        }
+
+        .nav-links li { margin-bottom: 0.5rem; }
+        
+        .nav-links a {
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.5rem 0;
+            transition: all 0.2s;
+            opacity: 0.8;
+        }
+        
+        .nav-links a:hover { 
+            color: var(--secondary); 
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .social-links { 
+            display: flex; 
+            gap: 1.25rem; 
+            margin-top: 3rem; 
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .social-links a {
+            color: var(--sidebar-text);
+            font-size: 1.25rem;
+            transition: color 0.2s;
+            opacity: 0.7;
+        }
+        .social-links a:hover { color: var(--primary); opacity: 1; }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            margin-left: 300px; /* Push content to the right of fixed sidebar */
+            flex: 1;
+            padding: 5rem 6rem;
+            max-width: 1100px;
+        }
+
+        section { margin-bottom: 6rem; scroll-margin-top: 4rem; }
+        
+        h2 { 
+            font-size: 1.75rem; 
+            font-weight: 700;
+            margin-bottom: 2.5rem; 
+            color: #1e293b;
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* Lilac underline accent */
+        h2::after {
+            content: '';
+            display: block;
+            width: 40px; 
+            height: 4px;
+            background-color: var(--primary); 
+            margin-top: 0.5rem;
+            border-radius: 2px;
+        }
+
+        p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #475569; max-width: 65ch; }
+        
+        a.text-link { color: var(--primary); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; transition: border 0.2s; }
+        a.text-link:hover { border-bottom: 1px solid var(--primary); }
+
+        /* --- PROJECT CARDS --- */
+        .project-card {
+            background: #fff;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex; 
+        }
+
+        .project-card:hover { transform: translateY(-4px); box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1); }
+
+        .project-visual {
+            flex: 0 0 38%;
+            background-color: var(--light-gray);
+            border-right: 1px solid var(--card-border);
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-visual::after {
+            content: '';
+            position: absolute;
+            top:0; left:0; right:0; bottom:0;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .project-card:hover .project-visual::after { opacity: 0.05; }
+
+        .project-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .project-card:hover .project-img { transform: scale(1.05); }
+
+        .project-details { padding: 2.5rem; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        
+        .project-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .project-title { font-size: 1.5rem; font-weight: 700; color: #1e293b; }
+        
+        .badge { 
+            background: #f3e8ff; color: var(--primary); 
+            padding: 0.35rem 0.85rem; border-radius: 999px; 
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+        }
+
+        .project-summary { margin-bottom: 1.5rem; color: #334155; font-size: 1.05rem; line-height: 1.6; }
+        .key-result { font-size: 0.95rem; background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary); color: #475569; }
+
+        /* --- EXPERIENCE ITEMS --- */
+        .exp-item { margin-bottom: 2.5rem; }
+        .exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
+        .exp-role { font-weight: 700; font-size: 1.2rem; color: #1e293b; }
+        .exp-date { font-family: 'Inter', sans-serif; color: var(--gray); font-size: 0.95rem; font-weight: 500; }
+        .exp-company { font-weight: 600; color: var(--primary); margin-bottom: 0.75rem; display: block; font-size: 1rem; }
+        
+        /* --- PUBLICATIONS --- */
+        .pub-list { list-style: none; }
+        .pub-item { margin-bottom: 2rem; padding-left: 0; }
+        
+        .pub-title { 
+            font-weight: 700; color: #1e293b; display: block; margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.4;
+            transition: color 0.2s;
+        }
+        .pub-title:hover { color: var(--primary); }
+        
+        .pub-venue { 
+            display: inline-block;
+            background: var(--light-gray);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-style: normal; 
+            color: #475569; 
+            font-size: 0.85rem; 
+            font-weight: 500;
+            margin-top: 0.5rem;
+            border: 1px solid var(--card-border);
+        }
+        
+        .scholar-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #fff;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .scholar-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(139, 92, 246, 0.15); }
+
+        /* --- SERVICE LIST --- */
+        .service-list { list-style: none; }
+        .service-item { display: flex; margin-bottom: 1rem; align-items: baseline; }
+        .service-icon { color: var(--primary); width: 30px; font-size: 1rem; transform: translateY(2px); }
+        .service-text { flex: 1; color: #475569; font-size: 1.05rem; }
+        .service-role { font-weight: 700; color: #1e293b; margin-right: 0.5rem; }
+
+        /* --- SKILLS --- */
+        .skill-category { margin-bottom: 2rem; }
+        .skill-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin-bottom: 1rem; display: block; font-weight: 700; }
+        .skill-cloud { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+        .skill-tag {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #475569;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .skill-tag:hover { border-color: var(--primary); color: var(--primary); background: #f5f3ff; transform: translateY(-2px); }
+
+        /* --- MOBILE --- */
+        /* I lowered this breakpoint from 900px to 700px so it stays 'Desktop Mode' in split screen */
+        @media (max-width: 700px) {
+            body { flex-direction: column; }
+            .sidebar { 
+                width: 100%; height: auto; position: relative; 
+                padding: 3rem 1.5rem; align-items: center; text-align: center;
+                border-right: none; border-bottom: 1px solid #2d2a3b;
+            }
+            .nav-links a { text-align: center; }
+            .social-links { justify-content: center; }
+            .profile-photo { margin-bottom: 1.5rem; width: 140px; height: 140px; }
+            
+            .main-content { margin-left: 0; padding: 3rem 1.5rem; }
+            .nav-links { display: none; } 
+            
+            .project-card { flex-direction: column; }
+            .project-visual { height: 220px; width: 100%; border-right: none; border-bottom: 1px solid var(--card-border); }
+            .project-details { padding: 1.5rem; }
+            
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LEFT SIDEBAR (Fixed Left, Left-Aligned Text) -->
+    <aside class="sidebar">
+        <!-- Replace src with your actual photo filename -->
+        <img src="profile.jpg" alt="Atena Nourzad" class="profile-photo">
+        
+        <h1>Fatemeh (Atena) Nourzad</h1>
+        <div class="subtitle">PhD Candidate<br>Electrical & Computer Engineering<br>The Ohio State University</div>
+
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Featured Projects</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#service">Service & Leadership</a></li>
+            <li><a href="#skills">Skills</a></li>
+        </ul>
+
+        <div class="social-links">
+            <a href="mailto:nourzad.1@osu.edu" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://scholar.google.com/citations?user=0tPAHdUAAAAJ&hl=en" target="_blank" title="Google Scholar">
+                <i class="fas fa-graduation-cap"></i></a>
+            <a href="www.linkedin.com/in/fatemeh-nourzad" target="_blank" title="LinkedIn">
+                <i class="fab fa-linkedin"></i></a>
+            
+            <a href="https://github.com/atinourzad" target="_blank" title="GitHub">
+                <i class="fab fa-github"></i></a>
+
+            <a href="https://twitter.com/AtiNourzad" target="_blank" title="X (Twitter)">
+                <i class="fab fa-x-twitter"></i>
+            </a>
+        </div>
+    </aside>
+
+    <!-- RIGHT CONTENT -->
+    <main class="main-content">
+        
+        <!-- ABOUT -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                I am a PhD Candidate in Electrical & Computer Engineering at The Ohio State University, advised by <a href="https://u.osu.edu/shroff-11/" class="text-link">Prof. Ness B. Shroff</a>.
+            </p>
+            <p>
+                My research sits at the intersection of <strong>Machine Learning (ML)</strong> and <strong>Natural Language Processing (NLP)</strong>. I think of myself as a "full-stack" researcher: I develop novel algorithms for <strong>LLM alignment (RLxF)</strong>, <strong>multi-objective optimization</strong>, and <strong>AI Safety</strong>, and I build the <strong>scalable distributed systems</strong> required to train and evaluate them in real-world settings.
+            </p>
+            <p>
+                My work has resulted in multiple first-author publications, including contributions to top-tier venues like <strong>ICML 2025</strong>.
+            </p>
+        </section>
+
+        <!-- PROJECTS (Cards) -->
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            
+            <div class="project-card">
+                <div class="project-visual">
+                    <!-- Add your image here -->
+                    <img src="compass_viz.png" alt="COMPASS Project" class="project-img" style="opacity:0.5"> <!-- Placeholder opacity -->
+                </div>
+                <div class="project-details">
+                    <div class="project-header">
+                        <span class="project-title">COMPASS</span>
+                        <span class="badge">Algorithms</span>
+                    </div>
+                    <div class="project-summary">
+                        An advanced <strong>RLxF (GRPO)</strong> algorithm to generate preference-conditioned LLM responses.
+                    </div>
+                    <div class="key-result">
+                        <strong>Impact:</strong> Addressed reward hacking and validated robustness using Pareto-front analysis and external LLM judges.
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-visual">
+                    <img src="firm_viz.png" alt="FIRM Project" class="project-img" style="opacity:0.5">
+                </div>
+                <div class="project-details">
+                    <div class="project-header">
+                        <span class="project-title">FIRM</span>
+                        <span class="badge">Privacy & Theory</span>
+                    </div>
+                    <div class="project-summary">
+                        A communication-efficient framework for multi-objective alignment in distributed settings.
+                    </div>
+                    <div class="key-result">
+                        <strong>Impact:</strong> Provided the first finite-time convergence guarantees and mitigated client "disagreement drift."
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-visual">
+                    <img src="flagon_viz.png" alt="FLAGON Project" class="project-img" style="opacity:0.5">
+                </div>
+                <div class="project-details">
+                    <div class="project-header">
+                        <span class="project-title">FLAGON</span>
+                        <span class="badge">Systems</span>
+                    </div>
+                    <div class="project-summary">
+                        A scalable, federated LLM pre- and post-training system (Llama-3 1B) using AWS coordinators.
+                    </div>
+                    <div class="key-result">
+                        <strong>Impact:</strong> Cut cross-site traffic by 75% and built a fault-tolerant pipeline for geo-distributed clients.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PUBLICATIONS -->
+        <section id="publications">
+            <h2>Selected Publications</h2>
+            <ul class="pub-list">
+                <li class="pub-item">
+                    <span class="pub-title">Provably Efficient RL for Linear MDPs under Instantaneous Safety Constraints</span>
+                    <div class="pub-venue">ICML 2025</div>
+                    <div class="pub-authors">Roknilamouki, A., Ghosh, A., Shi, M., <strong>Nourzad, F.</strong>, Ekici, E., Shroff, N.</div>
+                </li>
+                <li class="pub-item">
+                    <span class="pub-title">FIRM: Federated In-client Regularized Multi-objective Alignment for LLMs</span>
+                    <div class="pub-venue">Under Review (Top-Tier AI Conf), 2025</div>
+                    <div class="pub-authors"><strong>Nourzad, F.</strong>, et al.</div>
+                </li>
+                <li class="pub-item">
+                    <span class="pub-title">FLAGON: Federated Training and Fine-Tuning of LLMs</span>
+                    <div class="pub-venue">Invited Paper, IEEE/ACM Transactions on Networking, 2026</div>
+                    <div class="pub-authors"><strong>Nourzad, F.</strong>, et al.</div>
+                </li>
+                <li class="pub-item">
+                    <span class="pub-title">COMPASS: Conditioned Meta-Learning for Preference-Guided LLM Alignment</span>
+                    <div class="pub-venue">In preparation for submission to ICML, 2026</div>
+                    <div class="pub-authors"><strong>Nourzad, F.</strong>, et al.</div>
+                </li>
+            </ul>
+            
+            <a href="#" class="scholar-btn" target="_blank">
+                <i class="fas fa-external-link-alt"></i> View Full List on Google Scholar
+            </a>
+        </section>
+
+        <!-- EXPERIENCE & EDUCATION -->
+        <section id="experience">
+            <h2>Education & Experience</h2>
+            
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-role">Ph.D. Candidate, ECE</span>
+                    <span class="exp-date">2022 - Present</span>
+                </div>
+                <span class="exp-company">The Ohio State University</span>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-role">Graduate Research Assistant</span>
+                    <span class="exp-date">2022 - Present</span>
+                </div>
+                <span class="exp-company">AI-EDGE Institute / OSU</span>
+                <p style="font-size: 1rem; margin-top: 0.5rem;">Leading research on scalable LLM alignment and federated systems (FLAGON, COMPASS).</p>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-role">M.S. Electrical Engineering</span>
+                    <span class="exp-date">2021 - 2022</span>
+                </div>
+                <span class="exp-company">University of Tehran</span>
+                <p style="font-size: 1rem; margin-top: 0.5rem;">Thesis on Time-Series Modeling using Deep Neural Networks for seismic analysis.</p>
+            </div>
+        </section>
+
+        <!-- SERVICE -->
+        <section id="service">
+            <h2>Professional Service & Leadership</h2>
+            <ul class="service-list">
+                <li class="service-item">
+                    <span class="service-icon"><i class="fas fa-check-circle"></i></span>
+                    <div class="service-text">
+                        <span class="service-role">Reviewer:</span> NeurIPS (Workshop), AISTATS, IEEE/ACM ToN, ICDCS (2022–Present)
+                    </div>
+                </li>
+                <li class="service-item">
+                    <span class="service-icon"><i class="fas fa-users"></i></span>
+                    <div class="service-text">
+                        <span class="service-role">Co-Organizer:</span> Experts in AI and Networking, AI-EDGE Institute (2023–Present)
+                    </div>
+                </li>
+                <li class="service-item">
+                    <span class="service-icon"><i class="fas fa-microphone-alt"></i></span>
+                    <div class="service-text">
+                        <span class="service-role">Panelist:</span> AI-EDGE 2025 Summer REU Program
+                    </div>
+                </li>
+                <li class="service-item">
+                    <span class="service-icon"><i class="fas fa-female"></i></span>
+                    <div class="service-text">
+                        <span class="service-role">Collegiate Member:</span> Society of Women Engineers (SWE)
+                    </div>
+                </li>
+                <li class="service-item">
+                    <span class="service-icon"><i class="fas fa-chalkboard-teacher"></i></span>
+                    <div class="service-text">
+                        <span class="service-role">Teaching Assistant:</span> Machine Learning, Reinforcement Learning, Stochastic Process (University of Tehran)
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills">
+            <h2>Skills</h2>
+            
+            <div class="skill-category">
+                <span class="skill-label">Research Keywords</span>
+                <div class="skill-cloud">
+                    <span class="skill-tag">LLM Alignment (RLxF)</span>
+                    <span class="skill-tag">Robust Evaluation</span>
+                    <span class="skill-tag">Federated Learning</span>
+                    <span class="skill-tag">Scalable Systems</span>
+                    <span class="skill-tag">AI Safety</span>
+                    <span class="skill-tag">Multi-Objective Optimization</span>
+                    <span class="skill-tag">NLP</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <span class="skill-label">Stack</span>
+                <div class="skill-cloud">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">C/C++</span>
+                    <span class="skill-tag">PyTorch</span>
+                    <span class="skill-tag">Hugging Face</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">gRPC</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>
