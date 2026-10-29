@@ -1,624 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fatemeh (Atena) Nourzad | PhD Candidate</title>
-    <meta name="description" content="Academic website of Fatemeh (Atena) Nourzad.">
-
-    <!-- Fonts & Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            /* REFINED PALETTE - DARK PLUM & LILAC */
-            /* Sidebar: Darker, muted, almost black-purple */
-            --sidebar-bg: #1e1b29; 
-            
-            /* Sidebar Text: Soft white */
-            --sidebar-text: #f8fafc; 
-            
-            /* Primary Accent: Vibrant Lilac (for links/titles) */
-            --primary: #8b5cf6; 
-            
-            /* Secondary Accent: Soft Lavender (for borders/subtitles) */
-            --secondary: #ddd6fe; 
-            
-            /* Main Content Background */
-            --bg: #ffffff;
-            --text: #334155;
-            --gray: #64748b;
-            --light-gray: #f8fafc;
-            --card-border: #e2e8f0;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--text);
-            line-height: 1.6;
-            background-color: var(--bg);
-            display: flex;
-            flex-direction: row; /* Explicitly set row layout */
-            min-height: 100vh;
-        }
-
-        /* --- SIDEBAR --- */
-        .sidebar {
-            width: 300px;
-            background-color: var(--sidebar-bg);
-            color: var(--sidebar-text);
-            padding: 4rem 2.5rem;
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            overflow-y: auto;
-            border-right: 1px solid #2d2a3b;
-            text-align: left; 
-            z-index: 1000; /* Ensure it stays on top */
-        }
-
-        .profile-photo {
-            width: 180px; 
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary);
-            margin-bottom: 2rem;
-            background-color: var(--gray);
-        }
-
-        .sidebar h1 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 0.75rem;
-            color: #ffffff;
-        }
-
-        .sidebar .subtitle {
-            font-size: 0.8rem;
-            color: var(--secondary);
-            margin-bottom: 3rem;
-            font-weight: 400;
-            opacity: 0.9;
-            line-height: 1.5;
-        }
-
-        .nav-links {
-            list-style: none;
-            margin-bottom: auto; 
-            width: 100%;
-            padding: 0;
-        }
-
-        .nav-links li { margin-bottom: 0.5rem; }
-        
-        .nav-links a {
-            color: var(--sidebar-text);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            display: block;
-            padding: 0.5rem 0;
-            transition: all 0.2s;
-            opacity: 0.8;
-        }
-        
-        .nav-links a:hover { 
-            color: var(--secondary); 
-            opacity: 1;
-            transform: translateX(5px);
-        }
-
-        .social-links { 
-            display: flex; 
-            gap: 1.25rem; 
-            margin-top: 3rem; 
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .social-links a {
-            color: var(--sidebar-text);
-            font-size: 1.25rem;
-            transition: color 0.2s;
-            opacity: 0.7;
-        }
-        .social-links a:hover { color: var(--primary); opacity: 1; }
-
-        /* --- MAIN CONTENT --- */
-        .main-content {
-            margin-left: 300px; /* Push content to the right of fixed sidebar */
-            flex: 1;
-            padding: 5rem 6rem;
-            max-width: 1100px;
-        }
-
-        section { margin-bottom: 6rem; scroll-margin-top: 4rem; }
-        
-        h2 { 
-            font-size: 1.75rem; 
-            font-weight: 700;
-            margin-bottom: 2.5rem; 
-            color: #1e293b;
-            position: relative;
-            display: inline-block;
-        }
-        
-        /* Lilac underline accent */
-        h2::after {
-            content: '';
-            display: block;
-            width: 40px; 
-            height: 4px;
-            background-color: var(--primary); 
-            margin-top: 0.5rem;
-            border-radius: 2px;
-        }
-
-        p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #475569; max-width: 65ch; }
-        
-        a.text-link { color: var(--primary); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; transition: border 0.2s; }
-        a.text-link:hover { border-bottom: 1px solid var(--primary); }
-
-        /* --- ACTION BUTTON (Shared by CV and Scholar) --- */
-        .action-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-top: 1.5rem;
-            padding: 0.75rem 1.5rem; /* Larger padding for 'frame' look */
-            background-color: #fff;
-            color: var(--text);
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            border: 1px solid var(--card-border); /* The Frame */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        
-        /* Hover State: Changes color and lifts up */
-        .action-btn:hover { 
-            border-color: var(--primary); 
-            color: var(--primary); 
-            transform: translateY(-2px); 
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15); 
-            background-color: #fdfcff;
-        }
-
-        
-        /* --- PROJECT CARDS --- */
-        .project-card {
-            background: #fff;
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 3rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex; 
-        }
-
-        .project-card:hover { transform: translateY(-4px); box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1); }
-
-        .project-visual {
-            flex: 0 0 38%;
-            background-color: var(--light-gray);
-            border-right: 1px solid var(--card-border);
-            min-height: 280px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .project-visual::after {
-            content: '';
-            position: absolute;
-            top:0; left:0; right:0; bottom:0;
-            background: var(--primary);
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        .project-card:hover .project-visual::after { opacity: 0.05; }
-
-        .project-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .project-card:hover .project-img { transform: scale(1.05); }
-
-        .project-details { padding: 2.5rem; flex: 1; display: flex; flex-direction: column; justify-content: center; }
-        
-        .project-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .project-title { font-size: 1.5rem; font-weight: 700; color: #1e293b; }
-        
-        .badge { 
-            background: #f3e8ff; color: var(--primary); 
-            padding: 0.35rem 0.85rem; border-radius: 999px; 
-            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
-        }
-
-        .project-summary { margin-bottom: 1.5rem; color: #334155; font-size: 1.05rem; line-height: 1.6; }
-        .key-result { font-size: 0.95rem; background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary); color: #475569; }
-
-        /* --- EXPERIENCE ITEMS --- */
-        .exp-item { margin-bottom: 2.5rem; }
-        .exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
-        .exp-role { font-weight: 700; font-size: 1.2rem; color: #1e293b; }
-        .exp-date { font-family: 'Inter', sans-serif; color: var(--gray); font-size: 0.95rem; font-weight: 500; }
-        .exp-company { font-weight: 600; color: var(--primary); margin-bottom: 0.75rem; display: block; font-size: 1rem; }
-        
-        /* --- PUBLICATIONS --- */
-        .pub-list { list-style: none; }
-        .pub-item { margin-bottom: 2rem; padding-left: 0; }
-        
-        .pub-title { 
-            font-weight: 700; color: #1e293b; display: block; margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.4;
-            transition: color 0.2s;
-        }
-        .pub-title:hover { color: var(--primary); }
-        
-        .pub-venue { 
-            display: inline-block;
-            background: var(--light-gray);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-style: normal; 
-            color: #475569; 
-            font-size: 0.85rem; 
-            font-weight: 500;
-            margin-top: 0.5rem;
-            border: 1px solid var(--card-border);
-        }
-        
-        .scholar-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            padding: 0.75rem 1.5rem;
-            background-color: #fff;
-            color: var(--text);
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.2s;
-            border: 1px solid var(--card-border);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .scholar-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(139, 92, 246, 0.15); }
-
-        /* --- SERVICE LIST --- */
-        .service-list { list-style: none; }
-        .service-item { display: flex; margin-bottom: 1rem; align-items: baseline; }
-        .service-icon { color: var(--primary); width: 30px; font-size: 1rem; transform: translateY(2px); }
-        .service-text { flex: 1; color: #475569; font-size: 1.05rem; }
-        .service-role { font-weight: 700; color: #1e293b; margin-right: 0.5rem; }
-
-        /* --- SKILLS --- */
-        .skill-category { margin-bottom: 2rem; }
-        .skill-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin-bottom: 1rem; display: block; font-weight: 700; }
-        .skill-cloud { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-        .skill-tag {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            color: #475569;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-        .skill-tag:hover { border-color: var(--primary); color: var(--primary); background: #f5f3ff; transform: translateY(-2px); }
-
-        /* --- MOBILE --- */
-        /* I lowered this breakpoint from 900px to 700px so it stays 'Desktop Mode' in split screen */
-        @media (max-width: 700px) {
-            body { flex-direction: column; }
-            .sidebar { 
-                width: 100%; height: auto; position: relative; 
-                padding: 3rem 1.5rem; align-items: center; text-align: center;
-                border-right: none; border-bottom: 1px solid #2d2a3b;
-            }
-            .nav-links a { text-align: center; }
-            .social-links { justify-content: center; }
-            .profile-photo { margin-bottom: 1.5rem; width: 140px; height: 140px; }
-            
-            .main-content { margin-left: 0; padding: 3rem 1.5rem; }
-            .nav-links { display: none; } 
-            
-            .project-card { flex-direction: column; }
-            .project-visual { height: 220px; width: 100%; border-right: none; border-bottom: 1px solid var(--card-border); }
-            .project-details { padding: 1.5rem; }
-            
-            h1 { font-size: 2rem; }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fatemeh (Atena) Nourzad — PhD student at The Ohio State University researching language-model agents, multi-objective alignment, and distributed learning.">
+  <meta name="theme-color" content="#f9f7f8">
+  <title>Fatemeh Nourzad · Research</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header wrap">
+  <a class="wordmark" href="#home" aria-label="Fatemeh Nourzad, home">FN<span>.</span></a>
+  <nav aria-label="Main navigation">
+    <a href="#research">Research</a><a href="#publications">Publications</a><a href="#background">Background</a><a class="nav-cv" href="cv.pdf">CV <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
+<main id="main" class="wrap">
+  <section id="home" class="intro" aria-labelledby="name">
+    <p class="eyebrow">PhD student · The Ohio State University</p>
+    <h1 id="name">Fatemeh Nourzad<span class="preferred">I also go by <a href="https://en.wikipedia.org/wiki/Athena">Atena</a>.</span></h1>
+    <div class="intro-grid">
+      <div>
+        <p class="bio">I am a Ph.D. student in Electrical and Computer Engineering at The Ohio State University, advised by Professor <a href="https://u.osu.edu/shroff-11/">Ness B. Shroff</a>. I study how AI systems can acquire new capabilities and adapt to different goals while preserving their reasoning and reliable behavior.</p>
+        <p class="bio">My interest in engineering began with childhood conversations with my father, an earthquake-engineering professor. I found my own path through electrical engineering, drawn to the probability and optimization behind communication networks. Reading about machine learning for network optimization led me toward ML itself.</p>
+        <p class="bio">During my master’s at the University of Tehran, I worked with the <a href="https://www.iiees.ac.ir/en/">International Institute of Earthquake Engineering and Seismology</a> to detect earthquakes in noisy recordings. That experience sparked an interest in reliability that I carried into <a href="#pub-icml">safe reinforcement learning</a> at Ohio State, then into <a href="#research-alignment">language-model alignment</a>.</p>
+        <p class="bio">In collaboration with researchers at Google, I studied how one language model can adapt to different human preferences without retraining. Through <a href="https://aiedge.osu.edu">AI-EDGE</a>, I also worked on <a href="#research-systems">distributed LLM training</a>, bringing together my interests in learning algorithms and communication networks.</p>
+        <p class="bio">More recently, I have investigated <a href="#research-agents">how learning to use tools changes LLM agents’ reasoning</a>, and developed methods to help them retain these abilities. I am now exploring recursive self-improvement in multi-agent systems, asking how agents can improve collectively while their underlying models remain fixed.</p>
+        <div class="contact-links" aria-label="Professional links"><a href="mailto:nourzad.1@osu.edu">Email <span aria-hidden="true">↗</span></a><a href="cv.pdf">CV (PDF) <span aria-hidden="true">↗</span></a><a href="https://scholar.google.com/citations?user=0tPAHdUAAAAJ&amp;hl=en">Google Scholar <span aria-hidden="true">↗</span></a><a href="https://github.com/atinourzad">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/fatemeh-nourzad/">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://x.com/atinourzad?s=11">X <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- LEFT SIDEBAR (Fixed Left, Left-Aligned Text) -->
-    <aside class="sidebar">
-        <!-- Replace src with your actual photo filename -->
-        <img src="profile.jpg" alt="Atena Nourzad" class="profile-photo">
+  <section id="research" class="section" aria-labelledby="research-title">
+    <div class="section-heading"><div><h2 id="research-title">Research</h2></div></div>
+    <article class="research-row" id="research-agents"><div><h3>Tool-using agents &amp; reasoning retention</h3><p>How does learning to use tools change an agent’s reasoning? We investigated how tool-use reinforcement learning reshapes reasoning, finding that it can shorten deliberation even when its effects on accuracy vary across tasks. We developed methods to help agents acquire tool-use skills while retaining their ability to reason independently.</p><details class="related-papers"><summary>Related papers <span class="paper-count">(2)</span></summary><ul><li><a href="#pub-agents">Selective Forgetting in Tool-Augmented Language-Model Agents</a><span>NeurIPS 2026 TTCL Workshop<br>CoLLAs 2026 Work-In-Progress Track</span></li><li><a href="#pub-deliberation">Thinking Beyond Tools: How Tool-Use RL Reshapes Deliberation</a><span>Manuscript under review · 2026</span></li></ul></details></div></article>
+    <article class="research-row" id="research-alignment"><div><h3>Preference-conditioned &amp; federated alignment</h3><p>We study how language models can balance competing objectives, from adapting to individual preferences to learning collaboratively across clients.</p><details class="project-detail" id="research-meta"><summary>Meta-learning for preference steering</summary><div class="project-content"><p>In collaboration with researchers at Google, we developed a meta-learning framework that trains a single language-model policy to respond to different preference combinations at inference time, without retraining. We evaluated how well it balances competing objectives and generalizes to unseen preferences, and investigated optimization and geometric barriers that can limit continuous steering.</p><p class="project-paper-label">Related papers</p><ul class="project-papers"><li><a href="#pub-frontier">Learning to Steer the Pareto Frontier: Meta-Learning for Multi-Objective LLM Alignment</a><span>Manuscript under review · 2026</span></li><li><a href="#pub-alignment">Barriers to Pareto Steerability in Preference-Conditioned LLM Alignment</a><span>ICLR 2026 I Can’t Believe It’s Not Better Workshop</span></li><li><a href="#pub-many-goals">One Model, Many Goals: Meta-Learning Preference-Conditioned Alignment for Lifelong LLM Agents</a><span>ICLR 2026 Lifelong Agents Workshop</span></li></ul></div></details><details class="project-detail" id="research-federated"><summary>Federated multi-objective alignment</summary><div class="project-content"><p>How can clients align a shared language model when their objectives conflict and their data remain local? We developed a federated multi-objective alignment framework in which clients solve regularized optimization problems locally. This controls cross-client objective disagreement and reduces communication by avoiding the transmission of separate gradients for every objective. We established finite-time Pareto-stationarity bounds and evaluated the method across heterogeneous clients.</p><p class="project-paper-label">Related paper</p><ul class="project-papers"><li><a href="#pub-rethinking">Rethinking Multi-objective Resolution in Federated LLM Alignment</a><span>Manuscript under review · 2026</span></li></ul></div></details></div></article>
+    <article class="research-row" id="research-systems"><div><h3>Learning across distributed systems</h3><p>Institutions have useful compute, but rarely share identical hardware or networks. Through AI-EDGE, I co-developed systems for pretraining and federated fine-tuning across geographically distributed GPU clusters.</p><details class="related-papers"><summary>Related papers <span class="paper-count">(3)</span></summary><ul><li><a href="#pub-systems">Democratizing LLM Training with the Edge: Challenges, Systems, and the Road Ahead</a><span>IEEE/ACM ToN · Invited paper · Accepted · Publication forthcoming</span></li><li><a href="#pub-roadmap">Democratizing LLM Training Across Geo-Distributed Heterogeneous Compute: A Systems Position and Roadmap</a><span>NeurIPS 2026 CODE-FM workshop</span></li><li><a href="#pub-sigcomm">Toward WAN-Aware LLM Training Across Heterogeneous, Geo-Distributed Sites</a><span>ACM SIGCOMM NAIC Workshop · Extended abstract · Oral presentation · 2026</span></li></ul></details></div></article>
+    <div class="earlier-work"><span class="eyebrow">Earlier work</span><p>I also contributed to research on reinforcement learning with instantaneous safety constraints, published at <a href="#pub-icml">ICML 2025</a>. My master’s research focused on deep learning for seismic time-series analysis.</p></div>
+  </section>
+
+  <section id="publications" class="section" aria-labelledby="grouped-title"><div class="section-heading"><div><p class="eyebrow">Papers &amp; manuscripts</p><h2 id="grouped-title">Publications.</h2></div></div><p class="section-description">Related workshop contributions appear beneath the main manuscript. Each entry retains its own title, venue, and publication status. An asterisk indicates equal contribution.</p><div class="publication-group"><article class="publication" id="pub-deliberation"><div><h3>Thinking Beyond Tools: How Tool-Use RL Reshapes Deliberation</h3><p class="authors"><strong>Fatemeh Nourzad*</strong>, A. Roknilamouki*, Q. Wu*, E. Ekici, Y. Liang, N. B. Shroff</p><p class="venue muted">Manuscript under review · 2026</p></div></article><div class="nested-workshops"><p class="workshop-label">Related workshop contributions</p><ul class="workshop-list"><li id="pub-agents"><h4>Selective Forgetting in Tool-Augmented Language-Model Agents</h4><p class="authors"><strong>Fatemeh Nourzad*</strong>, A. Roknilamouki*, Q. Wu*, E. Ekici, Y. Liang, N. B. Shroff</p><p class="venue">NeurIPS 2026 TTCL Workshop<br>CoLLAs 2026 Work-In-Progress Track</p><a class="paper-link" href="https://openreview.net/pdf?id=LR42v6QEQr">Paper ↗</a></li></ul></div></div>
+<div class="publication-group"><article class="publication" id="pub-frontier"><div><h3>Learning to Steer the Pareto Frontier: Meta-Learning for Multi-Objective LLM Alignment</h3><p class="authors"><strong>Fatemeh Nourzad</strong>, D. Sow, Y. Liang, M. Zhang, Y. Li, E. Ekici, N. B. Shroff</p><p class="venue muted">Manuscript under review · 2026</p></div></article><div class="nested-workshops"><p class="workshop-label">Related workshop contributions</p><ul class="workshop-list"><li id="pub-alignment"><h4>Barriers to Pareto Steerability in Preference-Conditioned LLM Alignment</h4><p class="authors"><strong>Fatemeh Nourzad</strong>, D. Sow, Y. Liang, M. Shi, M. Zhang, Y. Li, E. Ekici, N. B. Shroff</p><p class="venue">ICLR 2026 I Can’t Believe It’s Not Better Workshop</p><a class="paper-link" href="https://openreview.net/forum?id=GVlh3flsqF">Paper ↗</a></li><li id="pub-many-goals"><h4>One Model, Many Goals: Meta-Learning Preference-Conditioned Alignment for Lifelong LLM Agents</h4><p class="authors"><strong>Fatemeh Nourzad</strong>, D. Sow, Y. Liang, M. Shi, M. Zhang, Y. Li, E. Ekici, N. B. Shroff</p><p class="venue">ICLR 2026 Lifelong Agents Workshop</p><a class="paper-link" href="https://openreview.net/forum?id=2FVShQSae2">Paper ↗</a></li></ul></div></div>
+<div class="publication-group"><article class="publication" id="pub-rethinking"><div><h3>Rethinking Multi-objective Resolution in Federated LLM Alignment</h3><p class="authors"><strong>Fatemeh Nourzad</strong>, A. Roknilamouki, H. Yang, E. Ekici, J. Liu, N. B. Shroff</p><p class="venue muted">Manuscript under review · 2026</p></div></article></div>
+<div class="publication-group"><article class="publication" id="pub-systems"><div><h3>Democratizing LLM Training with the Edge: Challenges, Systems, and the Road Ahead</h3><p class="authors">Z. Luo, J. Cai*, C. Le Denmat*, S. Nair*, <strong>Fatemeh Nourzad*</strong>, et al.</p><p class="venue">IEEE/ACM Transactions on Networking <span>· Invited paper · Publication forthcoming</span></p></div></article><div class="nested-workshops"><p class="workshop-label">Related workshop contributions</p><ul class="workshop-list"><li id="pub-roadmap"><h4><a href="https://openreview.net/pdf?id=pezODLJ0Fc">Democratizing LLM Training Across Geo-Distributed Heterogeneous Compute: A Systems Position and Roadmap</a></h4><p class="authors">Z. Luo, J. Cai*, C. Le Denmat*, S. Nair*, <strong>Fatemeh Nourzad*</strong>, et al.</p><p class="venue">NeurIPS 2026 CODE-FM workshop</p><a class="paper-link" href="https://openreview.net/pdf?id=pezODLJ0Fc">Paper ↗</a></li><li id="pub-sigcomm"><h4><a href="https://dl.acm.org/doi/pdf/10.1145/3789240.3828748">Toward WAN-Aware LLM Training Across Heterogeneous, Geo-Distributed Sites</a></h4><p class="venue">ACM SIGCOMM 2026 NAIC Workshop · Extended abstract</p><p class="authors">Oral presentation · <strong>The only extended-abstract submission selected for an oral presentation.</strong></p><a class="paper-link" href="https://dl.acm.org/doi/pdf/10.1145/3789240.3828748">Paper ↗</a></li></ul></div><p class="authorship-note">*Co-primary authors with equal contribution in alphabetical order.</p></div>
+<div class="publication-group"><article class="publication" id="pub-icml"><div><h3><a href="https://proceedings.mlr.press/v267/roknilamouki25a.html">Provably Efficient RL for Linear MDPs under Instantaneous Safety Constraints in Non-Convex Feature Spaces</a></h3><p class="authors">A. Roknilamouki, A. Ghosh, M. Shi, <strong>Fatemeh Nourzad</strong>, E. Ekici, N. B. Shroff</p><p class="venue">International Conference on Machine Learning (ICML) 2025</p><a class="paper-link" href="https://proceedings.mlr.press/v267/roknilamouki25a.html">Paper ↗</a></div></article></div></section>
+
+  <section id="background" class="section" aria-labelledby="background-title">
+    <div class="section-heading"><div><p class="eyebrow">Education &amp; community</p><h2 id="background-title">Background.</h2></div></div>
+    <div class="background-grid">
+      <section class="background-panel" aria-labelledby="education-heading">
+        <h3 id="education-heading">Education</h3>
+        <div class="background-item"><p class="date">2022–present · Expected May 2028</p><h4>PhD, Electrical &amp; Computer Engineering</h4><p>The Ohio State University</p><p class="detail">Advisor: Ness B. Shroff</p></div>
+        <div class="background-item"><p class="date">2019–2022</p><h4>MS, Electrical &amp; Computer Engineering</h4><p>University of Tehran</p></div>
+        <div class="background-item"><p class="date">2014–2018</p><h4>BS, Electrical &amp; Computer Engineering</h4><p>University of Tehran</p></div>
+      </section>
+      <section class="background-panel" aria-labelledby="experience-heading">
+        <h3 id="experience-heading">Research experience</h3>
+        <div class="background-item"><p class="date">2024–present</p><h4>Research Assistant</h4><p>The Ohio State University</p></div>
+        <div class="background-item"><p class="date">2023–2026</p><h4>Research Assistant · AI-EDGE</h4><p>Federated &amp; distributed foundation-model training</p></div>
         
-        <h1>Fatemeh (Atena) Nourzad</h1>
-        <div class="subtitle">PhD Candidate<br>Electrical & Computer Engineering<br>The Ohio State University</div>
-
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Featured Projects</a></li>
-            <li><a href="#publications">Publications</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#service">Service & Leadership</a></li>
-            <li><a href="#skills">Skills</a></li>
-        </ul>
-
-        <div class="social-links">
-            <a href="mailto:nourzad.1@osu.edu" title="Email"><i class="fas fa-envelope"></i></a>
-            <a href="https://scholar.google.com/citations?user=0tPAHdUAAAAJ&hl=en" target="_blank" title="Google Scholar">
-                <i class="fas fa-graduation-cap"></i></a>
-            <a href="https://www.linkedin.com/in/fatemeh-nourzad/" target="_blank" title="LinkedIn">
-                <i class="fab fa-linkedin"></i></a>
-            
-            <a href="https://github.com/atinourzad" target="_blank" title="GitHub">
-                <i class="fab fa-github"></i></a>
-
-            <a href="https://twitter.com/AtiNourzad" target="_blank" title="X (Twitter)">
-                <i class="fab fa-x-twitter"></i></a>
-        </div>
-    </aside>
-
-    <!-- RIGHT CONTENT -->
-    <main class="main-content">
-        
-        <!-- ABOUT -->
-        <!-- ABOUT -->
-        <section id="about">
-            <h2>About Me</h2>
-            <p>
-                I am a PhD Candidate in Electrical & Computer Engineering at The Ohio State University, advised by <a href="https://u.osu.edu/shroff-11/" class="text-link" target="_blank">Prof. Ness B. Shroff</a>. I work at the intersection of <strong>Machine Learning</strong>, <strong>NLP</strong>, and <strong>Systems</strong>, focusing on how to align powerful models with human preferences, keep them safe, and still run them at scale on messy, real-world infrastructure.
-            </p>
-            <p>
-                My path into AI started with <strong>seismic time-series</strong> during my M.S. at the University of Tehran, where I built deep models to detect and classify earthquake events in noisy waveforms. That project convinced me that real data is never clean or stationary, and that perspective has shaped how I think about every model since.
-            </p>
-            <p>
-                At Ohio State, I moved into <strong>Safe Reinforcement Learning</strong> with instantaneous constraints. I helped evaluate an algorithm (<strong><a href="#pub-icml" class="text-link">ICML 2025</a></strong>) showing that even in non-convex settings it is possible to have both exploration and rigorous guarantees about what the agent will not do. That work made me think constantly in tradeoffs: performance versus risk, optimism versus caution, and theory versus real-world execution.
-            </p>
-            <p>
-                More recently, I’ve been asking similar questions in the world of foundation models. In collaboration with researchers at Google, I’ve been working on <strong><a href="#proj-compass" class="text-link">COMPASS</a></strong>, a preference-conditioned RL fine-tuning method that trains a single language model policy which adapts its behavior based on user preference vectors rather than one fixed notion of “good.”
-            </p>
-            <p>
-                In parallel, through the AI-EDGE Institute, I’ve worked on federated and distributed training for LLMs — including <strong><a href="#proj-firm" class="text-link">FIRM</a></strong>, a multi-objective alignment method that resolves conflicts like helpfulness vs. safety locally at the client, and <strong><a href="#proj-flagon" class="text-link">FLAGON</a></strong>, a cross-university pre-training and fine-tuning system that uses existing heterogeneous GPU clusters behind firewalls to collaboratively train models like <strong>LLaMA-3 1B</strong> (resulting in an invited paper at <strong>IEEE/ACM ToN</strong>).
-            </p>
-            <p>
-                Across all of this, one idea keeps me grounded: models are only useful if we can both trust their behavior and actually deploy them in the real world.
-            </p>
-            
-            <!-- CV BUTTON -->
-            <a href="https://drive.google.com/file/d/18zWhDEufZwp9isUgrUGAMlaLu_viCtFf/view?usp=sharing" class="action-btn" target="_blank">
-                <i class="fas fa-file-pdf"></i> Download Curriculum Vitae
-            </a>
-        </section>
-
-        <!-- PROJECTS (No Images Mode) -->
-        <section id="projects">
-            <h2>Featured Projects</h2>
-            
-            <!-- ADDED ID="proj-compass" -->
-            <div class="project-card" id="proj-compass">
-                <div class="project-visual">
-                    <i class="fas fa-compass"></i>
-                </div>
-                <div class="project-details">
-                    <div class="project-header">
-                    <span class="project-title">COMPASS</span>
-                    <span class="badge">Alignment & RL</span>
-                    </div>
-                    <div class="project-summary">
-                    A preference-conditioned RLxF (GRPO) method that trains a <strong>single LLM policy</strong>
-                    whose behavior can be steered by a <strong>user preference vector</strong> instead of a fixed notion of “good.”
-                    </div>
-                    <div class="key-result">
-                    <strong>Impact:</strong> Learns to move along the <strong>Pareto front</strong> between competing objectives
-                    and <strong>generalizes to unseen preference mixes</strong>, while surfacing reward hacking via Pareto-front analysis
-                    instead of a single score.
-                    </div>
-                </div>
-            </div>
-
-            <!-- ADDED ID="proj-firm" -->
-            <div class="project-card" id="proj-firm">
-                <div class="project-visual">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <div class="project-details">
-                    <div class="project-header">
-                    <span class="project-title">
-                        FIRM
-                        <a href="YOUR_ARXIV_LINK_HERE" target="_blank" title="Read Paper"
-                        style="font-size:0.7em; color:var(--gray); margin-left:0.3rem; vertical-align:middle;">
-                        <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </span>
-                    <span class="badge">Federated Alignment</span>
-                    </div>
-                    <div class="project-summary">
-                    A <strong>federated multi-objective alignment</strong> framework where each client locally
-                    balances objectives (e.g., helpfulness vs. safety) while keeping raw data on-device.
-                    </div>
-                    <div class="key-result">
-                    <strong>Impact:</strong> Uses an in-client regularizer to control cross-client
-                    <strong>“disagreement drift”</strong>, <strong>cuts per-round communication to ≈1/M</strong>
-                    (for M objectives), and provides the <strong>first finite-time convergence guarantees</strong>
-                    in this setting. 
-                    </div>
-                </div>
-            </div>
-
-            <!-- ADDED ID="proj-flagon" -->
-            <div class="project-card" id="proj-flagon">
-                <div class="project-visual">
-                    <i class="fas fa-server"></i>
-                </div>
-                <div class="project-details">
-                    <div class="project-header">
-                    <span class="project-title">FLAGON</span>
-                    <span class="badge">Distributed Systems</span>
-                    </div>
-                    <div class="project-summary">
-                    A <strong>cross-university LLM training platform</strong> that lets institutions use
-                    their existing, heterogeneous GPU clusters behind firewalls and high-latency links.
-                    </div>
-                    <div class="key-result">
-                    <strong>Impact:</strong> Pre-trained and fine-tuned <strong>GPT-2</strong> and
-                    <strong>LLaMA-3&nbsp;1B</strong> across sites while automatically recovering from GPU preemptions — work that led to an
-                    <strong>invited paper at IEEE/ACM ToN</strong>.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PUBLICATIONS -->
-        <section id="publications">
-            <h2>Selected Publications</h2>
-            <ul class="pub-list">
-                <li class="pub-item">
-                    <span class="pub-title">Provably Efficient RL for Linear MDPs under Instantaneous Safety Constraints</span>
-                    <div class="pub-venue">ICML 2025</div>
-                    <div class="pub-authors">Roknilamouki, A., Ghosh, A., Shi, M., <strong>Nourzad, F.</strong>, Ekici, E., Shroff, N.</div>
-                </li>
-                <li class="pub-item">
-                    <span class="pub-title">FIRM: Federated In-client Regularized Multi-objective Alignment for LLMs</span>
-                    <div class="pub-venue">Under Review (Top-Tier AI Conf), 2025</div>
-                    <div class="pub-authors"><strong>Nourzad, F.</strong>, et al.</div>
-                </li>
-                <li class="pub-item">
-                    <span class="pub-title">FLAGON: Federated Training and Fine-Tuning of LLMs</span>
-                    <div class="pub-venue">Invited Paper, IEEE/ACM Transactions on Networking, 2026</div>
-                    <div class="pub-authors"><strong>Nourzad, F.</strong>, et al.</div>
-                </li>
-                <li class="pub-item">
-                    <span class="pub-title">COMPASS: Conditioned Meta-Learning for Preference-Guided LLM Alignment</span>
-                    <div class="pub-venue">In preparation for submission to ICML, 2026</div>
-                    <div class="pub-authors"><strong>Nourzad, F.</strong>, et al.</div>
-                </li>
-            </ul>
-            
-            <a href="https://scholar.google.com/citations?user=0tPAHdUAAAAJ&hl=en" class="scholar-btn" target="_blank">
-                <i class="fas fa-external-link-alt"></i> View Full List on Google Scholar
-            </a>
-        </section>
-
-        <!-- EXPERIENCE & EDUCATION -->
-        <section id="experience">
-            <h2>Education & Experience</h2>
-            
-            <div class="exp-item">
-                <div class="exp-header">
-                    <span class="exp-role">Ph.D. Candidate, ECE</span>
-                    <span class="exp-date">2022 - Present</span>
-                </div>
-                <span class="exp-company">The Ohio State University</span>
-            </div>
-
-            <div class="exp-item">
-                <div class="exp-header">
-                    <span class="exp-role">Graduate Research Assistant</span>
-                    <span class="exp-date">2022 - Present</span>
-                </div>
-                <span class="exp-company">AI-EDGE Institute / OSU</span>
-                <p style="font-size: 1rem; margin-top: 0.5rem;">Research on scalable LLM alignment and federated systems.</p>
-            </div>
-
-            <div class="exp-item">
-                <div class="exp-header">
-                    <span class="exp-role">M.S. Electrical Engineering</span>
-                    <span class="exp-date">2021 - 2022</span>
-                </div>
-                <span class="exp-company">University of Tehran</span>
-                <p style="font-size: 1rem; margin-top: 0.5rem;">Thesis on Time-Series Modeling using Deep Neural Networks for seismic analysis.</p>
-            </div>
-        </section>
-
-        <!-- SERVICE -->
-        <section id="service">
-            <h2>Professional Service & Leadership</h2>
-            <ul class="service-list">
-                <li class="service-item">
-                    <span class="service-icon"><i class="fas fa-check-circle"></i></span>
-                    <div class="service-text">
-                        <span class="service-role">Reviewer:</span> NeurIPS (Workshop), AISTATS, IEEE/ACM ToN, ICDCS (2022–Present)
-                    </div>
-                </li>
-                <li class="service-item">
-                    <span class="service-icon"><i class="fas fa-users"></i></span>
-                    <div class="service-text">
-                        <span class="service-role">Co-Organizer:</span> Experts in AI and Networking, AI-EDGE Institute (2023–Present)
-                    </div>
-                </li>
-                <li class="service-item">
-                    <span class="service-icon"><i class="fas fa-microphone-alt"></i></span>
-                    <div class="service-text">
-                        <span class="service-role">Panelist:</span> AI-EDGE 2025 Summer REU Program
-                    </div>
-                </li>
-                <li class="service-item">
-                    <span class="service-icon"><i class="fas fa-female"></i></span>
-                    <div class="service-text">
-                        <span class="service-role">Collegiate Member:</span> Society of Women Engineers (SWE)
-                    </div>
-                </li>
-                <li class="service-item">
-                    <span class="service-icon"><i class="fas fa-chalkboard-teacher"></i></span>
-                    <div class="service-text">
-                        <span class="service-role">Teaching Assistant:</span> Machine Learning, Reinforcement Learning, Stochastic Process (University of Tehran)
-                    </div>
-                </li>
-            </ul>
-        </section>
-
-        <!-- SKILLS -->
-        <section id="skills">
-            <h2>Skills</h2>
-            
-            <div class="skill-category">
-                <span class="skill-label">Research Keywords</span>
-                <div class="skill-cloud">
-                    <span class="skill-tag">LLM Alignment (RLxF)</span>
-                    <span class="skill-tag">Robust Evaluation</span>
-                    <span class="skill-tag">Federated Learning</span>
-                    <span class="skill-tag">Scalable Systems</span>
-                    <span class="skill-tag">AI Safety</span>
-                    <span class="skill-tag">Multi-Objective Optimization</span>
-                    <span class="skill-tag">NLP</span>
-                </div>
-            </div>
-
-            <div class="skill-category">
-                <span class="skill-label">Stack</span>
-                <div class="skill-cloud">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">C/C++</span>
-                    <span class="skill-tag">PyTorch</span>
-                    <span class="skill-tag">Hugging Face</span>
-                    <span class="skill-tag">AWS</span>
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">gRPC</span>
-                </div>
-            </div>
-        </section>
-
-    </main>
+      </section>
+    </div>
+    <section class="technical-experience" aria-labelledby="technical-heading">
+      <h3 id="technical-heading">Technical experience</h3>
+      <dl class="technical-list">
+        <div><dt>Programming &amp; ML</dt><dd>Python, C/C++, PyTorch, Hugging Face, Weights &amp; Biases</dd></div>
+        <div><dt>LLM post-training</dt><dd>PPO, GRPO, DPO, PEFT/LoRA, tool-use RL</dd></div>
+        <div><dt>Distributed training</dt><dd>FSDP, DeepSpeed, SLURM, CUDA, gRPC</dd></div>
+        <div><dt>Infrastructure</dt><dd>Linux, Git, Docker, AWS, Google Cloud</dd></div>
+      </dl>
+    </section>
+    <div class="service"><h3 class="group-heading">Service &amp; selected recognition</h3><dl><div><dt>Peer review</dt><dd>NeurIPS, NeurIPS Workshops, ICLR, AISTATS, NAACL, IEEE/ACM ToN, ICDCS <span class="detail">· 2022–present</span></dd></div><div><dt>Organizing</dt><dd>Experts in AI and Networking, AI-EDGE Institute <span class="detail">· Co-organizer, 2023–present</span></dd></div><div><dt>Teaching</dt><dd>Machine Learning, Reinforcement Learning, and Stochastic Processes, University of Tehran <span class="detail">· Teaching assistant, 2017–2022</span></dd></div><div><dt>Community</dt><dd>Panelist, AI-EDGE Summer REU Program <span class="detail">· 2025</span></dd></div><div><dt>Presentations</dt><dd><ul class="presentation-list"><li>Artificial Intelligence Modeling, Analysis, and Control of Complex Systems (AIMACCS) Workshop <span class="detail">· Presenter, June 2026</span></li><li>ACM SIGCOMM NAIC Workshop <span class="detail">· 2026 oral presentation; only extended-abstract submission selected for an oral</span></li><li>Kraus Memorial ECE Graduate Poster Competition <span class="detail">· Selected presenter, 2025</span></li></ul></dd></div></dl></div>
+  </section>
+  <footer><div><p class="footer-name">Fatemeh Nourzad</p><p>Electrical &amp; Computer Engineering · The Ohio State University</p></div><a href="mailto:nourzad.1@osu.edu">nourzad.1@osu.edu ↗</a></footer>
+</main>
 </body>
 </html>
